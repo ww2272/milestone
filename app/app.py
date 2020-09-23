@@ -2,11 +2,11 @@ from flask import Flask, render_template, request, redirect, session
 import requests
 import pandas as pd
 from bokeh.plotting import figure
-from bokeh.palettes import Spectral11
-from bokeh.embed import components 
+#from bokeh.palettes import Spectral11
+#from bokeh.embed import components 
 from bokeh.resources import CDN
-from bokeh.embed import json_item
-import json
+#from bokeh.embed import json_item
+import simplejson as json
 from bokeh.embed import file_html
 
 app = Flask(__name__)
@@ -33,13 +33,13 @@ def graph():
 	#print(stock_price.iloc[:,3][:30].astype('float'))
 
 	if 'close' in request.form.getlist('features'):
-		p.line(x=dates, y=stock_price.iloc[:,3][:30].astype("float"), line_width=2, legend_label="Close")
+		p.line(x=dates, y=stock_price.iloc[:,3][:30].astype("float"), line_width=2, legend="Close")
 	if 'high' in request.form.getlist('features'):
-		p.line(x=dates, y=stock_price.iloc[:,1][:30].astype("float"), line_width=2, legend_label="High", line_color="green")
+		p.line(x=dates, y=stock_price.iloc[:,1][:30].astype("float"), line_width=2, legend="High", line_color="green")
 	if 'open' in request.form.getlist('features'):
-		p.line(x=dates, y=stock_price.iloc[:,0][:30].astype("float"), line_width=2, legend_label="Open", line_color="red")
+		p.line(x=dates, y=stock_price.iloc[:,0][:30].astype("float"), line_width=2, legend="Open", line_color="red")
 	if 'low' in request.form.getlist('features'):
-		p.line(x=dates, y=stock_price.iloc[:,2][:30].astype("float"), line_width=2, legend_label="High", line_color="purple")
+		p.line(x=dates, y=stock_price.iloc[:,2][:30].astype("float"), line_width=2, legend="High", line_color="purple")
 
 	
 	
